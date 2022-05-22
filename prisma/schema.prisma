@@ -8,10 +8,38 @@ datasource db {
 }
 
 model Users {
-  id    String @id @default(uuid())
-  name  String
-  email String @unique
-  curso String
+  id         String   @id @default(uuid())
+  name       String
+  email      String   @unique
+  curso      String
+  created_at DateTime @default(now())
+  update_at  DateTime @updatedAt
+
+  Courses   Courses? @relation(fields: [coursesId], references: [id])
+  coursesId String?
 
   @@map("users")
+}
+
+model Courses {
+  id    String  @id @default(uuid())
+  name  String
+  users Users[]
+
+  @@map("courses")
+}
+
+model Speakers {
+  id          String @id @default(uuid())
+  photo       String
+  name        String
+  occupation  String
+  description String
+  instagram   String
+  linkedin    String
+
+  created_at DateTime @default(now())
+  update_at  DateTime @updatedAt
+
+  @@map("speakers")
 }
