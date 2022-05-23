@@ -1,23 +1,26 @@
-generator client {
-  provider = "prisma-client-js"
-}
-
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator erd {
+  provider = "prisma-erd-generator"
+}
+
 model Users {
-  id         String   @id @default(uuid())
-  name       String
-  email      String   @unique
-  curso      String
-  created_at DateTime @default(now())
-  update_at  DateTime @updatedAt
+  id    String @id @default(uuid())
+  name  String
+  email String @unique
 
   Courses   Courses? @relation(fields: [coursesId], references: [id])
   coursesId String?
 
+  created_at DateTime @default(now())
+  update_at  DateTime @updatedAt
   @@map("users")
 }
 
