@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-import { AppServiceHello } from 'src/service/hello.service';
-import { AppController } from '../controller/app.controller';
-import { ListController } from '../controller/ListUsers/list.users.controller';
-import { AppService } from '../service/app.service';
+import { EpiceService } from '../service/app.service';
+import { EpiceController } from '../controller/epice.controller';
+import { PrismaModule } from '../prisma/prisma.module';
+import { EpiceUsersRepository } from '../repositories';
 
 @Module({
-  imports: [],
-  controllers: [AppController, ListController],
-  providers: [AppService, AppServiceHello],
+  imports: [PrismaModule],
+  controllers: [EpiceController],
+  providers: [EpiceUsersRepository, EpiceService]
 })
-export class AppModule { }
+export class EpiceModule { }
