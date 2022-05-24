@@ -7,16 +7,12 @@ generator client {
   provider = "prisma-client-js"
 }
 
-generator erd {
-  provider = "prisma-erd-generator"
-}
-
 model Users {
   id    String @id @default(uuid())
   name  String
   email String @unique
 
-  Courses   Courses? @relation(fields: [coursesId], references: [id])
+  Courses   Courses? @relation(fields: [coursesId], references: [name])
   coursesId String?
 
   created_at DateTime @default(now())
@@ -25,8 +21,7 @@ model Users {
 }
 
 model Courses {
-  id    String  @id @default(uuid())
-  name  String
+  name  String  @unique
   users Users[]
 
   @@map("courses")
