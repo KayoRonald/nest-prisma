@@ -7,6 +7,6 @@ import { EpiceUsersRepository } from '../repositories';
 @Module({
   imports: [PrismaModule],
   controllers: [EpiceController],
-  providers: [EpiceUsersRepository, EpiceService]
+  providers: [EpiceUsersRepository, EpiceService],
 })
-export class EpiceModule { }
+export class EpiceModule {}
